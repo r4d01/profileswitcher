@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Profile Switcher</string>
+    <!-- Shown as a toast after switching: 🔔 bell, 📳 vibration mode, 🔕 muted bell -->
+    <string name="profile_normal_icon">🔔</string>
+    <string name="profile_vibration_icon">📳</string>
+    <string name="profile_dnd_icon">🔕</string>
+    <string name="dnd_access_required">Allow Do Not Disturb access for Profile Switcher</string>
+</resources>
