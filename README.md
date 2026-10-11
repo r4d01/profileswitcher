@@ -8,9 +8,15 @@ phone's sound profile and quits:
 **Normal → Vibration → Do Not Disturb → Normal → …**
 
 There is no app screen. Every press switches to the next profile, confirms it with 1, 2 or 3 short
-buzzes plus a small toast with the new profile icon (🔔 / 📳 / 🔕), and exits immediately. It only
-switches while the phone is **unlocked** — presses on the lock screen or with the screen off are
-ignored (see [known limitations](#known-limitations)).
+buzzes plus a small toast with the new profile icons, and exits immediately. It only switches
+while the phone is **unlocked** — presses on the lock screen or with the screen off are ignored
+(see [known limitations](#known-limitations)).
+
+| Profile        | Toast    | Meaning                                  |
+|----------------|----------|------------------------------------------|
+| Normal         | 🔔 🔊    | Ringer on, media on                      |
+| Vibration      | 📳 🔇    | Ringer on vibrate, media muted           |
+| Do Not Disturb | 📳 ⛔ 🔇 | Ringer on vibrate, DND on, media muted   |
 
 See [setup](#binding-it-to-the-moto-ai-key-tested-on-motorola-edge-70-pro) for binding it to the AI
 key. It also works from the app icon or from automation apps.
@@ -88,9 +94,12 @@ without looking: **1 buzz** = Normal, **2 buzzes** = Vibration, **3 buzzes** = D
 
 | Profile        | What the app sets                                                    |
 |----------------|----------------------------------------------------------------------|
-| Normal         | Interruption filter `ALL`, ringer mode `NORMAL`                      |
-| Vibration      | Interruption filter `ALL`, ringer mode `VIBRATE`                     |
-| Do Not Disturb | Ringer mode `VIBRATE`, interruption filter `PRIORITY` with the policy below. Requires Notification Policy Access |
+| Normal         | Interruption filter `ALL`, ringer mode `NORMAL`, media unmuted       |
+| Vibration      | Interruption filter `ALL`, ringer mode `VIBRATE`, media muted        |
+| Do Not Disturb | Ringer mode `VIBRATE`, interruption filter `PRIORITY` with the policy below, media muted. Requires Notification Policy Access |
+
+Media (music, videos) is muted in Vibration and Do Not Disturb, and switching back to Normal restores
+the volume it had before. Pressing a volume key while media is muted unmutes it.
 
 ## What gets through in Do Not Disturb
 
@@ -98,7 +107,7 @@ without looking: **1 buzz** = Normal, **2 buzzes** = Vibration, **3 buzzes** = D
 |------------------------------------------------|------------------------------------------------------------|
 | Calls from **starred contacts**                | ✅ Vibrate (the ringer is on vibrate, so they never ring)   |
 | Alarms and timers                              | ✅ Ring as usual                                            |
-| Media (music, videos)                          | ✅ Plays                                                    |
+| Media (music, videos)                          | 🔇 Muted — press a volume key to unmute                     |
 | Apps you allowed to interrupt DND (see below)  | ✅ Vibrate                                                  |
 | Profile Switcher's own 3-buzz confirmation     | ✅                                                          |
 | Calls from anyone else, incl. repeat callers   | ❌ Silent                                                   |
