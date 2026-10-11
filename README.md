@@ -39,6 +39,21 @@ author, because it isn't reviewed by any store.
 
 ## Building
 
+The build needs the Android SDK with API level 37 (`compileSdk`/`targetSdk`) and JDK 17 or newer.
+
+Gradle finds the SDK through `local.properties` in the project root. The file isn't in git
+because it holds a machine-specific path. Android Studio creates it the first time you open the
+project. For command-line builds, create it yourself with one line:
+
+```properties
+sdk.dir=/path/to/Android/Sdk
+```
+
+Typical locations are `~/Android/Sdk` on Linux, `~/Library/Android/sdk` on macOS and
+`C:\\Users\\<you>\\AppData\\Local\\Android\\Sdk` on Windows (backslashes have to be escaped). Setting
+the `ANDROID_HOME` environment variable works too, instead of the file. Nothing else goes in
+`local.properties`: there are no signing keys or API keys.
+
 Open the project in Android Studio and click **Run**, or build from the command line:
 
 ```bash
