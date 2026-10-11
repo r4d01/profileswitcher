@@ -51,7 +51,9 @@ sdk.dir=/path/to/Android/Sdk
 
 Typical locations are `~/Android/Sdk` on Linux, `~/Library/Android/sdk` on macOS and
 `C:\\Users\\<you>\\AppData\\Local\\Android\\Sdk` on Windows (backslashes have to be escaped). Setting
-the `ANDROID_HOME` environment variable works too, instead of the file. Nothing else goes in
+the `ANDROID_HOME` environment variable works too, instead of the file. You can also pass the
+path on the command line, `./gradlew assembleDebug -Psdk.dir=/path/to/Android/Sdk`, which writes
+it into `local.properties` (creating the file if needed) for later builds. Nothing else goes in
 `local.properties`: there are no signing keys or API keys.
 
 Open the project in Android Studio and click **Run**, or build from the command line:
