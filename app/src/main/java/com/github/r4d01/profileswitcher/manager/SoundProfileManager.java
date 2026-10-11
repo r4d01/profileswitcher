@@ -55,16 +55,33 @@ public class SoundProfileManager {
     }
 
     private boolean setSoundProfile(SoundProfile profile) {
+        boolean switched;
         switch (profile) {
             case NORMAL:
-                return leaveDndAndSetRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                switched = leaveDndAndSetRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                break;
             case VIBRATION:
-                return leaveDndAndSetRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+                switched = leaveDndAndSetRingerMode(AudioManager.RINGER_MODE_VIBRATE);
+                break;
             case DND:
-                return enterDnd();
+                switched = enterDnd();
+                break;
             default:
-                return false;
+                switched = false;
         }
+        if (switched) {
+            setMediaMuted(profile != SoundProfile.NORMAL);
+        }
+        return switched;
+    }
+
+    /**
+     * Mutes or unmutes media. The system keeps the original volume while muted and restores it on
+     * unmute; pressing a volume key also unmutes.
+     */
+    private void setMediaMuted(boolean muted) {
+        audioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC,
+                muted ? AudioManager.ADJUST_MUTE : AudioManager.ADJUST_UNMUTE, 0);
     }
 
     private boolean enterDnd() {
